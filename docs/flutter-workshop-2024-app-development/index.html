@@ -1,0 +1,799 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.15.8"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://blog.hicoder.one/flutter-workshop-2024-app-development/"><!-- Primary Meta Tags --><title>Flutterでタスク管理アプリを作ろう！~アプリ開発編~</title><meta name="title" content="Flutterでタスク管理アプリを作ろう！~アプリ開発編~"><meta name="description" content="Flutter Workshop 2024"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.hicoder.one/flutter-workshop-2024-app-development/"><meta property="og:title" content="Flutterでタスク管理アプリを作ろう！~アプリ開発編~"><meta property="og:description" content="Flutter Workshop 2024"><meta property="og:image" content="https://blog.hicoder.one/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.hicoder.one/flutter-workshop-2024-app-development/"><meta property="twitter:title" content="Flutterでタスク管理アプリを作ろう！~アプリ開発編~"><meta property="twitter:description" content="Flutter Workshop 2024"><meta property="twitter:image" content="https://blog.hicoder.one/blog-placeholder-1.jpg"><!-- Katex --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}@font-face{font-family:Atkinson;src:url(/fonts/atkinson-regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Atkinson;src:url(/fonts/atkinson-bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}body{font-family:Atkinson,sans-serif;margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media (max-width: 720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media (max-width: 720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>HiCoder Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Blog </a>  <a href="https://hicoder.one" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> HP </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://twitter.com/huhicoder" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/hu-hicoder" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img width="1020" height="510" src="/flutter-workshop-2024-app-development/flutter-workshop-app-development-thumbnail.png" alt="" data-astro-cid-bvzihdzo> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2024-10-08T00:00:00.000Z"> Oct 8, 2024 </time>  </div> <h1 data-astro-cid-bvzihdzo>Flutterでタスク管理アプリを作ろう！~アプリ開発編~</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="はじめに">はじめに</h2>
+<p>この記事では、Flutter を使ってシンプルなタスク管理アプリを開発する方法について解説します。Flutter は、Google が提供するオープンソースの UI フレームワークで、美しく動作するクロスプラットフォームアプリを簡単に構築できます。この記事を通じて、Flutter の基本的な使い方やアプリ開発の流れを学んでいきましょう。</p>
+<h2 id="chatgpt-の使い方について">ChatGPT の使い方について</h2>
+<!-- ChatGPTとは
+ChatGPTの使い方 -->
+<!-- ベストプラクティスという言葉がわからない可能性 -->
+<!-- 検索エンジンも使うことを教える -->
+<p>開発中に疑問が生じた場合には、ChatGPT を利用して質問することをお勧めします。具体的なコードの書き方から、Flutter のベストプラクティスまで幅広くサポートを受けられるでしょう。</p>
+<h3 id="具体的な質問例">具体的な質問例</h3>
+<ul>
+<li>「Flutter での状態管理のベストプラクティスは何ですか？」</li>
+<li>「ListView.builder の使い方を教えてください。」</li>
+<li>「shared_preferences パッケージのインストール方法を教えてください。」</li>
+</ul>
+<!-- このコードをより良い方法で書きたい。コード貼る -->
+<h3 id="flutter-プロジェクトの作成">Flutter プロジェクトの作成</h3>
+<p>まずは、Flutter プロジェクトを作成してみましょう。</p>
+<h4 id="プロジェクトフォルダを作成しvscode-で開く">プロジェクトフォルダを作成し、VSCode で開く</h4>
+<ol>
+<li>
+<p>自分の PC 上の任意のディレクトリに <code>flutter-workshop</code> という名前のフォルダを作成します。（フォルダ名は何でも構いません）</p>
+</li>
+<li>
+<p>Visual Studio Code（以下、VSCode）でそのフォルダを開きます。VSCode を開いてから、「開く」で対象のフォルダを選択することもできます。</p>
+<p><img src="/flutter-workshop-2024-app-development/vscode-open.png" alt="写真"></p>
+</li>
+</ol>
+<h4 id="flutter-create-コマンド">flutter create コマンド</h4>
+<ol start="3">
+<li>
+<p>VSCode でプロジェクトフォルダを開いたら、ターミナルを開きます。左から 2 番目のボタンを押すことで、VSCode 内でターミナルを開くことができます。</p>
+<p><img src="/flutter-workshop-2024-app-development/vscode-terminal.png" alt="写真"></p>
+</li>
+<li>
+<p>以下のコマンドを実行して、新しい Flutter プロジェクトを作成します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">flutter</span><span style="color:#9ECBFF"> create</span><span style="color:#79B8FF"> --org</span><span style="color:#9ECBFF"> app.web</span><span style="color:#79B8FF"> --project-name</span><span style="color:#9ECBFF"> flutter_workshop</span><span style="color:#79B8FF"> --description</span><span style="color:#9ECBFF"> "Flutter講習会"</span><span style="color:#79B8FF"> --platforms=web</span><span style="color:#9ECBFF"> ./</span></span>
+<span class="line"></span></code></pre>
+<ul>
+<li><code>--org app.web</code>：アプリの組織名を指定します。</li>
+<li><code>--project-name flutter_workshop</code>：プロジェクト名を指定します。</li>
+<li><code>--description "Flutter 講習会"</code>：プロジェクトの説明を設定します。</li>
+<li><code>--platforms=web</code>：ターゲットプラットフォームを Web に指定します。</li>
+<li><code>./</code>：現在のディレクトリにプロジェクトを作成します。</li>
+</ul>
+<p>コマンドが完了すると、多数のファイルやフォルダが作成されます。これでプロジェクトの初期設定は成功です！</p>
+</li>
+</ol>
+<h4 id="アプリの実行方法">アプリの実行方法</h4>
+<ol start="5">
+<li>
+<p>アプリ開発を始める準備が整いました！主に編集するのは、<code>lib/main.dart</code> ファイルのコードです。このファイルには、デフォルトで「ボタンを押すと数字が増えるアプリ」が作成されています。</p>
+</li>
+<li>
+<p>試しにこのアプリを実行してみましょう。VSCode のターミナルで以下のコマンドを実行します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">flutter</span><span style="color:#9ECBFF"> run</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF"> chrome</span></span>
+<span class="line"></span></code></pre>
+<p>すると、アプリが <code>Google Chrome</code> 上で立ち上がります！補足として、<code>-d chrome</code> は、Chrome ブラウザ上でアプリを実行するための指定です。</p>
+</li>
+</ol>
+<p>これで、アプリの作成準備と起動方法が理解できました。次からは、実際に ToDo アプリを作成していきます！</p>
+<h3 id="基本的なアプリ構造の設定">基本的なアプリ構造の設定</h3>
+<p><code>lib/main.dart</code>ファイルを開き、以下のコードを追加します。ここでは、アプリの基本的な構造を設定します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'package:flutter/material.dart'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">  runApp</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">TaskManagerApp</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerApp</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatelessWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> MaterialApp</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      title</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスク管理アプリ'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      home</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatelessWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> Scaffold</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      appBar</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> AppBar</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク管理アプリ'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Center</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'ここにタスク一覧が表示されます'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明">説明:</h4>
+<ul>
+<li><strong><code>runApp</code></strong>: Flutterアプリケーションを起動するための関数です。ここでは<code>TaskManagerApp</code>ウィジェットをルートとして設定しています。</li>
+<li><strong><code>MaterialApp</code></strong>: Flutterのアプリケーションを構築するためのウィジェットで、Materialデザインを適用します。<code>title</code>はアプリのタイトルを指定します。</li>
+<li><strong><code>home</code></strong>: アプリのホーム画面を指定します。ここでは<code>TaskManagerHomePage</code>を設定しています。</li>
+<li><strong><code>ListView.builder</code></strong>: リストを効率的に表示するためのウィジェットで、スクロール可能なリストを作成します。<code>itemCount</code>でリストのアイテム数を指定し、<code>itemBuilder</code>で各アイテムのビルド方法を指定します。</li>
+<li><strong><code>ListTile</code></strong>: リストの各アイテムを表示するためのウィジェットで、タイトルやサブタイトル、アイコンなどを簡単に配置できます。</li>
+</ul>
+<h2 id="todoアプリの見た目を作る">TODOアプリの見た目を作る</h2>
+<p>ここでは、Flutterを使って基本的なUI（ユーザーインターフェース）を構築します。UIとは、ユーザーがアプリとやり取りするための画面やボタンなどの要素のことです。</p>
+<h3 id="ステップ1-ホームページの作成">ステップ1: ホームページの作成</h3>
+<p>まずは、アプリのホームページとなる<code>TaskManagerHomePage</code>クラスを編集します。このクラスでは、TODOリストを表示するための基本的なレイアウトを設定します。</p>
+<h4 id="taskmanagerhomepageクラスの作成"><code>TaskManagerHomePage</code>クラスの作成</h4>
+<p><code>lib/main.dart</code>ファイルに以下のコードを追加します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatefulWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  _TaskManagerHomePageState</span><span style="color:#B392F0"> createState</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> State</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">TaskManagerHomePage</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> Scaffold</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      appBar</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> AppBar</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク管理'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Center</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'ここにタスク一覧が表示されます'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明-1">説明:</h4>
+<ul>
+<li><strong><code>StatefulWidget</code></strong>: 状態を持つウィジェットです。ユーザーの操作によって変化するUIを作るときに使います。</li>
+<li><strong><code>Scaffold</code></strong>: アプリの基本的なレイアウトを提供するウィジェットで、AppBarやDrawer、FloatingActionButtonなどを簡単に配置できます。</li>
+<li><strong><code>AppBar</code></strong>: アプリの上部に表示されるバーで、タイトルやアクションボタンを配置できます。</li>
+<li><strong><code>Center</code></strong>: 子ウィジェットを中央に配置するためのウィジェットです。</li>
+</ul>
+<h3 id="ステップ2-todoリストの表示">ステップ2: TODOリストの表示</h3>
+<p>次に、TODOリストを表示するための基本的なUIを作成します。ここでは、<code>ListView</code>を使ってリスト形式でタスクを表示します。</p>
+<h4 id="listviewの追加"><code>ListView</code>の追加</h4>
+<p><code>_TaskManagerHomePageState</code>クラスの<code>build</code>メソッドを以下のように修正します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">@override</span></span>
+<span class="line"><span style="color:#79B8FF">Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#79B8FF"> Scaffold</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    appBar</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> AppBar</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク管理'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">    ),</span></span>
+<span class="line"><span style="color:#E1E4E8">    body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> ListView</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      children</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">        ListTile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          leading</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.check_box_outline_blank),</span></span>
+<span class="line"><span style="color:#E1E4E8">          title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク1'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ),</span></span>
+<span class="line"><span style="color:#79B8FF">        ListTile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          leading</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.check_box_outline_blank),</span></span>
+<span class="line"><span style="color:#E1E4E8">          title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク2'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ],</span></span>
+<span class="line"><span style="color:#E1E4E8">    ),</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明-2">説明:</h4>
+<ul>
+<li><strong><code>ListView</code></strong>: 複数のウィジェットを縦方向にスクロール可能なリストとして表示するウィジェットです。</li>
+<li><strong><code>ListTile</code></strong>: リスト内の各項目を表現するためのウィジェットで、タイトルやアイコンなどを簡単に配置できます。</li>
+<li><strong><code>Icon</code></strong>: アイコンを表示するためのウィジェットです。ここでは、チェックボックスのアイコンを使用しています。</li>
+</ul>
+<h3 id="ステップ3-タスクの追加ボタン">ステップ3: タスクの追加ボタン</h3>
+<p>最後に、タスクを追加するためのボタンを画面に追加します。<code>FloatingActionButton</code>を使って、画面の右下にボタンを配置します。</p>
+<h4 id="floatingactionbuttonの追加"><code>FloatingActionButton</code>の追加</h4>
+<p><code>Scaffold</code>ウィジェットのプロパティに<code>floatingActionButton</code>を追加します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#E1E4E8">floatingActionButton</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> FloatingActionButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#6A737D">    // タスク追加の処理をここに書きます</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">  child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.add),</span></span>
+<span class="line"><span style="color:#E1E4E8">  tooltip</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスクを追加'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">),</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明-3">説明:</h4>
+<ul>
+<li><strong><code>FloatingActionButton</code></strong>: 画面の上に浮かぶように表示されるボタンで、主にアクションを促すために使用されます。</li>
+<li><strong><code>onPressed</code></strong>: ボタンが押されたときに実行される関数を指定します。</li>
+<li><strong><code>tooltip</code></strong>: ボタンにカーソルを合わせたときに表示されるテキストです。</li>
+</ul>
+<h3 id="ステップ4-タスク追加機能の実装">ステップ4: タスク追加機能の実装</h3>
+<p>次に、タスクを追加できる機能を実装していきましょう。ここでは、ユーザーが新しいタスクを追加できるように、ダイアログを表示してタスク名を入力する方法を紹介します。</p>
+<h4 id="1-タスクを保持するリストを作成">1. タスクを保持するリストを作成</h4>
+<p>まず、タスクを保持するためのリストを<code>_TaskManagerHomePageState</code>クラスに追加します。このリストは、ユーザーが追加したタスクを保持します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> State</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">TaskManagerHomePage</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#79B8FF">  List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8">> _tasks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#6A737D">    // 省略</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="2-タスク追加用のダイアログを表示">2. タスク追加用のダイアログを表示</h4>
+<p><code>FloatingActionButton</code>の<code>onPressed</code>メソッドに、タスクを追加するためのダイアログを表示する処理を追加します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#E1E4E8">floatingActionButton</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> FloatingActionButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">    _displayAddTaskDialog</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">  child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.add),</span></span>
+<span class="line"><span style="color:#E1E4E8">  tooltip</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスクを追加'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">),</span></span>
+<span class="line"></span></code></pre>
+<p>次に、<code>_displayAddTaskDialog</code>メソッドを定義します。このメソッドでは、ユーザーがタスク名を入力できるダイアログを表示します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> _displayAddTaskDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#79B8FF">  TextEditingController</span><span style="color:#E1E4E8"> taskController </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> TextEditingController</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">    builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'新しいタスクを追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TextField</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          controller</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> taskController,</span></span>
+<span class="line"><span style="color:#E1E4E8">          decoration</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> InputDecoration</span><span style="color:#E1E4E8">(hintText</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> "タスク名を入力"</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ),</span></span>
+<span class="line"><span style="color:#E1E4E8">        actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">          TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">            onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">              Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#79B8FF">          TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">            onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">              setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                _tasks.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(taskController.text);</span></span>
+<span class="line"><span style="color:#E1E4E8">              });</span></span>
+<span class="line"><span style="color:#79B8FF">              Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明-4">説明:</h4>
+<ul>
+<li><strong><code>TextEditingController</code></strong>: テキストフィールドのテキストを管理するためのコントローラです。ユーザーが入力したテキストを取得するのに使います。</li>
+<li><strong><code>showDialog</code></strong>: ダイアログを表示するための関数です。<code>builder</code>でダイアログの内容を指定します。</li>
+<li><strong><code>AlertDialog</code></strong>: アラートダイアログを表示するためのウィジェットで、タイトル、コンテンツ、アクションボタンを指定できます。</li>
+<li><strong><code>TextField</code></strong>: ユーザーがテキストを入力できるフィールドです。</li>
+<li><strong><code>TextButton</code></strong>: テキストのみのボタンを表示するためのウィジェットです。</li>
+</ul>
+<h4 id="3-タスクリストの更新">3. タスクリストの更新</h4>
+<p><code>ListView</code>を<code>_tasks</code>リストの内容に基づいて動的に生成するように変更します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#E1E4E8">body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> ListView</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">builder</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  itemCount</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _tasks.length,</span></span>
+<span class="line"><span style="color:#E1E4E8">  itemBuilder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (context, index) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> ListTile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      leading</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.check_box_outline_blank),</span></span>
+<span class="line"><span style="color:#E1E4E8">      title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(_tasks[index]),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">),</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明-5">説明:</h4>
+<ul>
+<li><strong><code>ListView.builder</code></strong>: リストのアイテムを動的に生成するためのウィジェットです。<code>itemCount</code>でアイテム数を指定し、<code>itemBuilder</code>で各アイテムのビルド方法を指定します。</li>
+<li><strong><code>_tasks[index]</code></strong>: リストの各アイテムのタイトルとして、<code>_tasks</code>リストの要素を使用します。</li>
+</ul>
+<p>これで、ユーザーが「追加」ボタンを押すと、ダイアログが表示され、タスク名を入力して追加できるようになります。タスクはリストビューに表示され、追加されるたびにリストが更新されます。</p>
+<h3 id="現時点での全体のコード">現時点での全体のコード</h3>
+<p>以下は、これまでに作成したタスク管理アプリのコードです。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'package:flutter/material.dart'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">  runApp</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">TaskManagerApp</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerApp</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatelessWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> MaterialApp</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      title</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスク管理アプリ'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      home</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatefulWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  _TaskManagerHomePageState</span><span style="color:#B392F0"> createState</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> State</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">TaskManagerHomePage</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#79B8FF">  List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8">> _tasks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> Scaffold</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      appBar</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> AppBar</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク管理'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> ListView</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">builder</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        itemCount</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _tasks.length,</span></span>
+<span class="line"><span style="color:#E1E4E8">        itemBuilder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (context, index) {</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#79B8FF"> ListTile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            leading</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.check_box_outline_blank),</span></span>
+<span class="line"><span style="color:#E1E4E8">            title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(_tasks[index]),</span></span>
+<span class="line"><span style="color:#E1E4E8">          );</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      floatingActionButton</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> FloatingActionButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">          _displayAddTaskDialog</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#E1E4E8">        child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.add),</span></span>
+<span class="line"><span style="color:#E1E4E8">        tooltip</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスクを追加'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> _displayAddTaskDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#79B8FF">    TextEditingController</span><span style="color:#E1E4E8"> taskController </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> TextEditingController</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">      builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'新しいタスクを追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TextField</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            controller</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> taskController,</span></span>
+<span class="line"><span style="color:#E1E4E8">            decoration</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> InputDecoration</span><span style="color:#E1E4E8">(hintText</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> "タスク名を入力"</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">                setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                  _tasks.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(taskController.text);</span></span>
+<span class="line"><span style="color:#E1E4E8">                });</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ],</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h2 id="タスク削除機能の実装">タスク削除機能の実装</h2>
+<p>次に、ユーザーがタスクを削除できる機能を追加していきましょう。これにより、完了したタスクや不要になったタスクをリストから取り除くことができます。</p>
+<h3 id="ステップ1-タスク削除のためのuiの追加">ステップ1: タスク削除のためのUIの追加</h3>
+<p>まずは、各タスクに削除ボタンを追加します。<code>ListTile</code>ウィジェットに削除アイコンを追加し、タスクを削除するためのアクションを設定します。</p>
+<h4 id="listtileに削除アイコンを追加"><code>ListTile</code>に削除アイコンを追加</h4>
+<p><code>_TaskManagerHomePageState</code>クラスの<code>build</code>メソッド内の<code>ListView.builder</code>の<code>itemBuilder</code>を以下のように修正します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#E1E4E8">body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> ListView</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">builder</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  itemCount</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _tasks.length,</span></span>
+<span class="line"><span style="color:#E1E4E8">  itemBuilder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (context, index) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> ListTile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      leading</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.check_box_outline_blank),</span></span>
+<span class="line"><span style="color:#E1E4E8">      title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(_tasks[index]),</span></span>
+<span class="line"><span style="color:#E1E4E8">      trailing</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> IconButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        icon</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.delete),</span></span>
+<span class="line"><span style="color:#E1E4E8">        onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">          setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">            _tasks.</span><span style="color:#B392F0">removeAt</span><span style="color:#E1E4E8">(index);</span></span>
+<span class="line"><span style="color:#E1E4E8">          });</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">),</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明-6">説明:</h4>
+<ul>
+<li><strong><code>trailing</code></strong>: <code>ListTile</code>の右端に表示されるウィジェットを指定します。ここでは削除アイコンを表示しています。</li>
+<li><strong><code>IconButton</code></strong>: アイコンをボタンとして表示するウィジェットです。<code>onPressed</code>でボタンが押されたときの処理を指定します。</li>
+<li><strong><code>_tasks.removeAt(index)</code></strong>: 指定したインデックスのタスクをリストから削除します。</li>
+</ul>
+<h3 id="ステップ2-削除確認ダイアログの追加オプション">ステップ2: 削除確認ダイアログの追加（オプション）</h3>
+<p>タスクを削除する前に、確認のダイアログを表示することで、誤ってタスクを削除してしまうことを防ぐことができます。</p>
+<h4 id="削除確認ダイアログの実装">削除確認ダイアログの実装</h4>
+<p>削除アイコンの<code>onPressed</code>メソッドを以下のように修正し、削除前に確認ダイアログを表示します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#E1E4E8">onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">  _showDeleteConfirmationDialog</span><span style="color:#E1E4E8">(context, index);</span></span>
+<span class="line"><span style="color:#E1E4E8">},</span></span>
+<span class="line"></span></code></pre>
+<p>次に、<code>_showDeleteConfirmationDialog</code>メソッドを定義します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> _showDeleteConfirmationDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context, </span><span style="color:#79B8FF">int</span><span style="color:#E1E4E8"> index) {</span></span>
+<span class="line"><span style="color:#B392F0">  showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">    builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスクを削除しますか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'このタスクを削除してもよろしいですか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">          TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">            onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">              Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#79B8FF">          TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'削除'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">            onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">              setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                _tasks.</span><span style="color:#B392F0">removeAt</span><span style="color:#E1E4E8">(index);</span></span>
+<span class="line"><span style="color:#E1E4E8">              });</span></span>
+<span class="line"><span style="color:#79B8FF">              Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h4 id="説明-7">説明:</h4>
+<ul>
+<li><strong><code>showDialog</code></strong>: ダイアログを表示するための関数です。</li>
+<li><strong><code>AlertDialog</code></strong>: 削除確認用のダイアログを表示します。</li>
+<li><strong><code>TextButton</code></strong>: ダイアログのアクションボタンを表示します。削除をキャンセルするか、実行するかを選択できます。</li>
+</ul>
+<h3 id="現時点での全体のコード-1">現時点での全体のコード</h3>
+<p>以下は、タスク削除機能を追加したタスク管理アプリのコードです。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'package:flutter/material.dart'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">  runApp</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">TaskManagerApp</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerApp</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatelessWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> MaterialApp</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      title</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスク管理アプリ'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      home</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatefulWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  _TaskManagerHomePageState</span><span style="color:#B392F0"> createState</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> State</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">TaskManagerHomePage</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#79B8FF">  List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8">> _tasks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> Scaffold</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      appBar</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> AppBar</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク管理'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> ListView</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">builder</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        itemCount</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _tasks.length,</span></span>
+<span class="line"><span style="color:#E1E4E8">        itemBuilder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (context, index) {</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#79B8FF"> ListTile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            leading</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.check_box_outline_blank),</span></span>
+<span class="line"><span style="color:#E1E4E8">            title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(_tasks[index]),</span></span>
+<span class="line"><span style="color:#E1E4E8">            trailing</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> IconButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              icon</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.delete),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">                _showDeleteConfirmationDialog</span><span style="color:#E1E4E8">(context, index);</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          );</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      floatingActionButton</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> FloatingActionButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">          _displayAddTaskDialog</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#E1E4E8">        child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.add),</span></span>
+<span class="line"><span style="color:#E1E4E8">        tooltip</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスクを追加'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> _displayAddTaskDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#79B8FF">    TextEditingController</span><span style="color:#E1E4E8"> taskController </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> TextEditingController</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">      builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'新しいタスクを追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TextField</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            controller</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> taskController,</span></span>
+<span class="line"><span style="color:#E1E4E8">            decoration</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> InputDecoration</span><span style="color:#E1E4E8">(hintText</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> "タスク名を入力"</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">                setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                  _tasks.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(taskController.text);</span></span>
+<span class="line"><span style="color:#E1E4E8">                });</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ],</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> _showDeleteConfirmationDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context, </span><span style="color:#79B8FF">int</span><span style="color:#E1E4E8"> index) {</span></span>
+<span class="line"><span style="color:#B392F0">    showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">      builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスクを削除しますか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'このタスクを削除してもよろしいですか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'削除'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">                setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                  _tasks.</span><span style="color:#B392F0">removeAt</span><span style="color:#E1E4E8">(index);</span></span>
+<span class="line"><span style="color:#E1E4E8">                });</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ],</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>これで、タスクを削除する機能が実装されました。ユーザーはタスクリストの各項目に表示される削除ボタンを押すことで、タスクを削除することができます。また、削除前に確認ダイアログを表示することで、誤操作を防ぐことができます。</p>
+<h2 id="データの永続化">データの永続化</h2>
+<p>続きとして、タスク管理アプリにデータの永続化機能を追加していきましょう。データの永続化とは、アプリを終了してもデータが失われないように保存することです。これにより、アプリを再起動してもタスクが保持されます。Flutterでは、<code>shared_preferences</code>というパッケージを使って簡単にデータを永続化できます。</p>
+<h3 id="ステップ1-shared_preferencesパッケージのインストール">ステップ1: <code>shared_preferences</code>パッケージのインストール</h3>
+<p>まずは、<code>shared_preferences</code>パッケージをプロジェクトに追加します。このパッケージは、キーと値のペアを保存するためのシンプルな方法を提供します。</p>
+<h4 id="1-pubspecyamlファイルを編集">1. <code>pubspec.yaml</code>ファイルを編集</h4>
+<p><code>pubspec.yaml</code>ファイルを開き、<code>dependencies</code>セクションに<code>shared_preferences</code>を追加します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  flutter</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    sdk</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">flutter</span></span>
+<span class="line"><span style="color:#85E89D">  shared_preferences</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">^2.3.2</span><span style="color:#6A737D"> # 最新バージョンを確認してください</span></span>
+<span class="line"></span></code></pre>
+<ul>
+<li><strong><code>shared_preferences</code></strong>: Flutterでデータを永続化するためのパッケージです。バージョンは最新のものを指定してください。</li>
+</ul>
+<h4 id="2-パッケージをインストール">2. パッケージをインストール</h4>
+<p>ターミナルで以下のコマンドを実行して、パッケージをインストールします。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">flutter</span><span style="color:#9ECBFF"> pub</span><span style="color:#9ECBFF"> get</span></span>
+<span class="line"></span></code></pre>
+<h3 id="ステップ2-タスクの保存と読み込み">ステップ2: タスクの保存と読み込み</h3>
+<p>次に、アプリを起動するたびにタスクを保存し、再度読み込む機能を実装します。</p>
+<h4 id="1-shared_preferencesをインポート">1. <code>shared_preferences</code>をインポート</h4>
+<p><code>lib/main.dart</code>ファイルの先頭に<code>shared_preferences</code>をインポートします。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'package:shared_preferences/shared_preferences.dart'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span></code></pre>
+<h4 id="2-タスクの保存">2. タスクの保存</h4>
+<p>タスクを追加したときに、<code>shared_preferences</code>を使ってタスクを保存します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> _saveTasks</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  SharedPreferences</span><span style="color:#E1E4E8"> prefs </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> SharedPreferences</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  prefs.</span><span style="color:#B392F0">setStringList</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'tasks'</span><span style="color:#E1E4E8">, _tasks);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<ul>
+<li><strong><code>SharedPreferences.getInstance()</code></strong>: <code>SharedPreferences</code>のインスタンスを取得します。</li>
+<li><strong><code>setStringList</code></strong>: 文字列のリストを保存するためのメソッドです。</li>
+</ul>
+<p>タスクを追加する際に、このメソッドを呼び出します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#79B8FF">TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">  onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">    setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">      _tasks.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(taskController.text);</span></span>
+<span class="line"><span style="color:#B392F0">      _saveTasks</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#79B8FF">    Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">),</span></span>
+<span class="line"></span></code></pre>
+<h4 id="3-タスクの読み込み">3. タスクの読み込み</h4>
+<p>アプリ起動時に保存されたタスクを読み込みます。<code>_TaskManagerHomePageState</code>の<code>initState</code>メソッドをオーバーライドして、タスクを読み込む処理を追加します。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">@override</span></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> initState</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">  super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">initState</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">  _loadTasks</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> _loadTasks</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  SharedPreferences</span><span style="color:#E1E4E8"> prefs </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> SharedPreferences</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">  setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    _tasks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> prefs.</span><span style="color:#B392F0">getStringList</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'tasks'</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">??</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<ul>
+<li><strong><code>initState</code></strong>: ウィジェットが初めて作成されたときに呼び出されるメソッドです。</li>
+<li><strong><code>getStringList</code></strong>: 保存された文字列のリストを取得するためのメソッドです。データが存在しない場合は、空のリストを返します。</li>
+</ul>
+<h3 id="ステップ3-タスク削除時の保存">ステップ3: タスク削除時の保存</h3>
+<p>タスクを削除したときにも、変更を保存するようにします。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> _showDeleteConfirmationDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context, </span><span style="color:#79B8FF">int</span><span style="color:#E1E4E8"> index) {</span></span>
+<span class="line"><span style="color:#B392F0">  showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">    builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスクを削除しますか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'このタスクを削除してもよろしいですか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">          TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">            onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">              Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#79B8FF">          TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'削除'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">            onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">              setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                _tasks.</span><span style="color:#B392F0">removeAt</span><span style="color:#E1E4E8">(index);</span></span>
+<span class="line"><span style="color:#B392F0">                _saveTasks</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              });</span></span>
+<span class="line"><span style="color:#79B8FF">              Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>これで、タスクを追加したり削除したりするたびに、データが保存されるようになりました。アプリを再起動しても、タスクが保持されることを確認できます。</p>
+<h3 id="現時点での全体のコード-2">現時点での全体のコード</h3>
+<p>以下は、データの永続化機能を追加したタスク管理アプリのコードです。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="dart"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'package:flutter/material.dart'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'package:shared_preferences/shared_preferences.dart'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">  runApp</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">TaskManagerApp</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerApp</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatelessWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> MaterialApp</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      title</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスク管理アプリ'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      home</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> TaskManagerHomePage</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> StatefulWidget</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  _TaskManagerHomePageState</span><span style="color:#B392F0"> createState</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#79B8FF"> _TaskManagerHomePageState</span><span style="color:#F97583"> extends</span><span style="color:#79B8FF"> State</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">TaskManagerHomePage</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#79B8FF">  List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">String</span><span style="color:#E1E4E8">> _tasks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> initState</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">    super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">initState</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">    _loadTasks</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> _loadTasks</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    SharedPreferences</span><span style="color:#E1E4E8"> prefs </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> SharedPreferences</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">    setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">      _tasks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> prefs.</span><span style="color:#B392F0">getStringList</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'tasks'</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">??</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> _saveTasks</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    SharedPreferences</span><span style="color:#E1E4E8"> prefs </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> SharedPreferences</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    prefs.</span><span style="color:#B392F0">setStringList</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'tasks'</span><span style="color:#E1E4E8">, _tasks);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  @override</span></span>
+<span class="line"><span style="color:#79B8FF">  Widget</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> Scaffold</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      appBar</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> AppBar</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスク管理'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      body</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> ListView</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">builder</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        itemCount</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> _tasks.length,</span></span>
+<span class="line"><span style="color:#E1E4E8">        itemBuilder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (context, index) {</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#79B8FF"> ListTile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            leading</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.check_box_outline_blank),</span></span>
+<span class="line"><span style="color:#E1E4E8">            title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(_tasks[index]),</span></span>
+<span class="line"><span style="color:#E1E4E8">            trailing</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> IconButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              icon</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.delete),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">                _showDeleteConfirmationDialog</span><span style="color:#E1E4E8">(context, index);</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          );</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">      floatingActionButton</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> FloatingActionButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">          _displayAddTaskDialog</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#E1E4E8">        },</span></span>
+<span class="line"><span style="color:#E1E4E8">        child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Icon</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">Icons</span><span style="color:#E1E4E8">.add),</span></span>
+<span class="line"><span style="color:#E1E4E8">        tooltip</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> 'タスクを追加'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      ),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> _displayAddTaskDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#79B8FF">    TextEditingController</span><span style="color:#E1E4E8"> taskController </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> TextEditingController</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">      builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'新しいタスクを追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> TextField</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            controller</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> taskController,</span></span>
+<span class="line"><span style="color:#E1E4E8">            decoration</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> InputDecoration</span><span style="color:#E1E4E8">(hintText</span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> "タスク名を入力"</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'追加'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">                setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                  _tasks.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(taskController.text);</span></span>
+<span class="line"><span style="color:#B392F0">                  _saveTasks</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                });</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ],</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> _showDeleteConfirmationDialog</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context, </span><span style="color:#79B8FF">int</span><span style="color:#E1E4E8"> index) {</span></span>
+<span class="line"><span style="color:#B392F0">    showDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      context</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> context,</span></span>
+<span class="line"><span style="color:#E1E4E8">      builder</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">BuildContext</span><span style="color:#E1E4E8"> context) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> AlertDialog</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">          title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'タスクを削除しますか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          content</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'このタスクを削除してもよろしいですか？'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">          actions</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x3C;</span><span style="color:#79B8FF">Widget</span><span style="color:#F97583">></span><span style="color:#E1E4E8">[</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'キャンセル'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#79B8FF">            TextButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">              child</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'削除'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">              onPressed</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">                setState</span><span style="color:#E1E4E8">(() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                  _tasks.</span><span style="color:#B392F0">removeAt</span><span style="color:#E1E4E8">(index);</span></span>
+<span class="line"><span style="color:#B392F0">                  _saveTasks</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                });</span></span>
+<span class="line"><span style="color:#79B8FF">                Navigator</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">of</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">pop</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">              },</span></span>
+<span class="line"><span style="color:#E1E4E8">            ),</span></span>
+<span class="line"><span style="color:#E1E4E8">          ],</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>これで、タスク管理アプリにデータの永続化機能が追加されました。</p>
+<h2 id="おわりに">おわりに</h2>
+<h3 id="学んだことのまとめ">学んだことのまとめ</h3>
+<p>このワークショップを通じて、Flutter の基本的な使い方や、UI の設計、データの管理方法について学びました。</p>
+<p>今回学んだ機能が含まれるデモアプリのソースコードは<a href="https://github.com/hu-hicoder/flutter-workshop-demo">こちらのGitHubのリンク</a>から見ることができます。</p>
+<h3 id="今後の追加機能について">今後の追加機能について</h3>
+<p>このアプリにさらに機能を追加することができます。例えば、タスクの詳細、見た目の調整、編集機能、期限の設定、通知機能などです。</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2024 HiCoder
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://twitter.com/huhicoder" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/hu-hicoder" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer>  </body></html>
